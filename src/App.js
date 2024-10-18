@@ -1,8 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
-import UserList from './components/UserList';
-import PostList from './components/PostList';
 import CreatePost from './components/Post/CreatePost/CreatePost';
 import SignUp from './components/User/SignUp';
 import SignIn from './components/User/SignIn';
@@ -24,20 +21,3 @@ const App = () => {
 };
 
 export default App;
-
-/*
-<div>
-    <h1>Welcome to My Instagram</h1>
-
-    <h2>Users:</h2>
-    <UserList />
-
-    <SignUp />
-
-    <SignIn />
-
-    <h2>Posts:</h2>
-    <PostList />
-
-    <CreatePost />
-</div> */

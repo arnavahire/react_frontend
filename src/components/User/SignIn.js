@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import SignUp from './SignUp';
+import { TextField, Button, Typography, Container, Box } from '@mui/material';
 
 const SignIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate(); // Get the navigate function from useNavigate
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -16,53 +16,68 @@ const SignIn = () => {
                 password,
             });
 
-            // for viewing the logs on front end
             console.log('User signed in:', response.data);
-
             sessionStorage.setItem('user', JSON.stringify(response.data));
-
-            // Handle successful login, e.g., store user data or redirect
             navigate('/dashboard');
-
         } catch (error) {
             console.error('Error during sign-in:', error);
         }
     };
 
-    const SignUp = () => {
-        navigate('/signup')
-    }
+    const handleSignUp = () => {
+        navigate('/signup');
+    };
 
     return (
-        <div>
-            <h1>Sign In</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Email:</label>
-                    <input
+        <Container maxWidth="sm">
+            <Box sx={{ mt: 5, p: 3, boxShadow: 3, borderRadius: 2 }}>
+                <Typography variant="h4" align="center" gutterBottom>
+                    Sign In
+                </Typography>
+                <form onSubmit={handleSubmit}>
+                    <TextField
+                        label="Email"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input
+                    <TextField
+                        label="Password"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                </div>
-                <button type="submit">Sign In</button>
-            </form>
-
-            <h4>Not a user? Sign up!</h4>
-            
-            <button onClick={navigate('/signup')}>Sign Up</button>
-
-        </div>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        type="submit"
+                        fullWidth
+                        sx={{ mt: 2, mb: 2 }}
+                    >
+                        Sign In
+                    </Button>
+                </form>
+                <Typography variant="body1" align="center" gutterBottom>
+                    Not a user? Sign up!
+                </Typography>
+                <Button
+                    variant="outlined"
+                    color="secondary"
+                    onClick={handleSignUp}
+                    fullWidth
+                >
+                    Sign Up
+                </Button>
+            </Box>
+        </Container>
     );
 };
 

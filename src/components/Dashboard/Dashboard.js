@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserList from './../UserList';
 import PostList from './../PostList';
-import CreatePost from '../Post/CreatePost/CreatePost';
-// import CreatePost from './components/Post/CreatePost/CreatePost';
+import { TextField, Button, Typography, Container, Box } from '@mui/material';
 
 const Dashboard = () => {
     const user = JSON.parse(sessionStorage.getItem('user'));
@@ -16,14 +15,28 @@ const Dashboard = () => {
         }
     }, [user, navigate]);
 
+    const handleCreatePost = () => {
+        navigate('/createpost');
+    };
+
     return (
         <div>
-            <h1>Welcome to the Dashboard {user.username}</h1>
+            <Typography variant="h4" gutterBottom align="center">
+                Welcome to the Dashboard {user.username}
+            </Typography>
+
+            <Button
+                variant="outlined"
+                color="secondary"
+                onClick={handleCreatePost}
+                fullWidth
+            >
+                Create a Post!
+            </Button>
 
             <PostList />
             <UserList />
-            <CreatePost />
-
+            
         </div>
     );
 };
