@@ -35,7 +35,7 @@ const Dashboard = () => {
             </Button>
 
             <PostList />
-            <UserList />
+            <UserList />  {/* TODO: this should only be visible for admins. Currently it's just been dumped on the dashboard */}
             
         </div>
     );
