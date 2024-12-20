@@ -88,6 +88,7 @@ const SignUp = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
+                
                 <Button variant="contained" color="primary" type="submit" fullWidth>
                     Sign Up
                 </Button>

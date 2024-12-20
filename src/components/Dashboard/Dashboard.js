@@ -16,7 +16,7 @@ const Dashboard = () => {
     }, [user, navigate]);
 
     const handleCreatePost = () => {
-        navigate('/createpost');
+        navigate('/uploadPost');
     };
 
     return (
@@ -31,7 +31,7 @@ const Dashboard = () => {
                 onClick={handleCreatePost}
                 fullWidth
             >
-                Create a Post!
+                Upload a Post!
             </Button>
 
             <PostList />

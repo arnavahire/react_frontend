@@ -19,6 +19,7 @@ const SignIn = () => {
             console.log('User signed in:', response.data);
             sessionStorage.setItem('user', JSON.stringify(response.data));
             navigate('/dashboard');
+            
         } catch (error) {
             console.error('Error during sign-in:', error);
         }
