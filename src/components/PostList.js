@@ -46,9 +46,6 @@ const PostList = () => {
 
     return (
         <Box sx={{ p: 4 }}>
-            <Typography variant="h4" gutterBottom align="center">
-                Post List
-            </Typography>
             {loading ? (
                 <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
                     <CircularProgress />

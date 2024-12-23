@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { TextField, Button, Box, Typography } from '@mui/material';
+import { TextField, Button, Box, Typography, Container } from '@mui/material';
+import Footer from '../Footer/Footer';
 
 const SignUp = () => {
     const [username, setUsername] = useState('');
@@ -20,7 +21,6 @@ const SignUp = () => {
             });
 
             setIsTextVisible(!isTextVisible);
-
             setUsername("");
             setEmail("");
             setPassword("");
@@ -38,69 +38,71 @@ const SignUp = () => {
     }
 
     return (
-        <div>
-            
-
-            <Box
-                component="form"
-                onSubmit={handleSubmit}
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 2,
-                    maxWidth: 400,
-                    margin: 'auto',
-                    padding: 3,
-                    border: '1px solid #ccc',
-                    borderRadius: 2,
-                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-                }}
-            >
-                <Typography variant="h5" component="h2" textAlign="center" gutterBottom>
-                    Sign Up
-                </Typography>
-                <TextField
-                    label="Username"
-                    name="username"
-                    variant="outlined"
-                    fullWidth
-                    required
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-                <TextField
-                    label="Email"
-                    name="email"
-                    type="email"
-                    variant="outlined"
-                    fullWidth
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <TextField
-                    label="Password"
-                    name="password"
-                    type="password"
-                    variant="outlined"
-                    fullWidth
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                
-                <Button variant="contained" color="primary" type="submit" fullWidth>
-                    Sign Up
-                </Button>
-
-                {isTextVisible && (
-                    <><Typography variant="h5" component="h2" textAlign="center" gutterBottom>
-                        Registration Successful!
+        <Box
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                minHeight: '100vh', // Ensure full height of the viewport
+            }}
+        >
+            <Container maxWidth="xs" sx={{ flexGrow: 1 }}>
+                <Box
+                    component="form"
+                    onSubmit={handleSubmit}
+                    sx={{ mt: 5, p: 3, boxShadow: 3, borderRadius: 2 }}
+                >
+                    <Typography variant="h5" component="h2" textAlign="center" gutterBottom>
+                        Sign Up
                     </Typography>
-                    <Button onClick={SignInAfterSignUp}>Sign In</Button></>
-                )}
-            </Box>
-        </div>
+                    <TextField
+                        label="Username"
+                        name="username"
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
+                        required
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <TextField
+                        label="Email"
+                        name="email"
+                        type="email"
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <TextField
+                        label="Password"
+                        name="password"
+                        type="password"
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
+                        required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    
+                    <Button variant="contained" color="primary" type="submit" fullWidth sx={{ mt: 2, mb: 2 }}>
+                        Sign Up
+                    </Button>
+
+                    {isTextVisible && (
+                        <>
+                            <Typography variant="h5" component="h2" textAlign="center" gutterBottom>
+                                Registration Successful!
+                            </Typography>
+                            <Button onClick={SignInAfterSignUp}>Sign In</Button>
+                        </>
+                    )}
+                </Box>
+            </Container>
+            <Footer /> {/* Push footer to the bottom */}
+        </Box>
     );
 };
 

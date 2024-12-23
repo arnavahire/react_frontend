@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { TextField, Button, Box, Typography, CircularProgress, Snackbar, Alert } from '@mui/material';
+import { TextField, Button, Box, Container, Typography, CircularProgress, Snackbar, Alert } from '@mui/material';
+import Navbar from '../../Navbar/Navbar';
+import Footer from '../../Footer/Footer';
 
 const UploadPost = () => {
     const [caption, setCaption] = useState('');
@@ -41,7 +43,7 @@ const UploadPost = () => {
             // Reset form fields and redirect to the dashboard to show new post
             setCaption('');
             setImage(null);
-            handleBackToDashboard() 
+            handleBackToHomeFeed(); 
         } catch (error) {
             console.error('Error uploading post:', error);
             setErrorMessage('Failed to upload post. Please try again.');
@@ -51,96 +53,102 @@ const UploadPost = () => {
     };
 
     // Navigate back to dashboard
-    const handleBackToDashboard = () => {
-        navigate('/dashboard');
+    const handleBackToHomeFeed = () => {
+        navigate('/homeFeed');
     };
 
     return (
-        <Box
-            component="form"
-            onSubmit={handleSubmit}
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                maxWidth: 500,
-                margin: 'auto',
-                padding: 3,
-                boxShadow: 3,
-                borderRadius: 2,
-                backgroundColor: '#f9f9f9',
-            }}
-        >
-            <Typography variant="h4" component="h1" sx={{ mb: 3 }} textAlign="center">
-                Upload a New Post
-            </Typography>
-            <TextField
-                label="Caption"
-                variant="outlined"
-                value={caption}
-                onChange={(e) => setCaption(e.target.value)}
-                required
-                sx={{ mb: 2 }}
-            />
-            <Button
-                variant="contained"
-                component="label"
-                sx={{ mb: 3 }}
-            >
-                Upload Image
-                <input
-                    type="file"
-                    accept="image/*"
-                    hidden
-                    onChange={(e) => setImage(e.target.files[0])} // Store selected file
-                />
-            </Button>
-            {image && (
-                <Typography variant="body1" sx={{ mb: 2 }}>
-                    Selected Image: {image.name}
-                </Typography>
-            )}
-            <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                disabled={loading}
-                sx={{ mb: 2 }}
-            >
-                {loading ? <CircularProgress size={24} color="inherit" /> : 'Upload Post'}
-            </Button>
-            <Button
-                variant="outlined"
-                color="secondary"
-                onClick={handleBackToDashboard}
-            >
-                Back to Dashboard
-            </Button>
-
-            {/* Success Snackbar */}
-            {successMessage && (
-                <Snackbar
-                    open={!!successMessage}
-                    autoHideDuration={3000}
-                    onClose={() => setSuccessMessage('')}
+        <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: '#f9f9f9' }}>
+            <Container>
+                <Box
+                    component="form"
+                    onSubmit={handleSubmit}
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        maxWidth: 500,
+                        margin: 'auto',
+                        padding: 3,
+                        boxShadow: 3,
+                        borderRadius: 2,
+                        backgroundColor: '#f9f9f9',
+                    }}
                 >
-                    <Alert onClose={() => setSuccessMessage('')} severity="success">
-                        {successMessage}
-                    </Alert>
-                </Snackbar>
-            )}
+                    <Navbar />
+                    <Typography variant="h4" component="h1" sx={{ mb: 3 }} textAlign="center">
+                        Upload a New Post
+                    </Typography>
+                    <TextField
+                        label="Caption"
+                        variant="outlined"
+                        value={caption}
+                        onChange={(e) => setCaption(e.target.value)}
+                        required
+                        sx={{ mb: 2 }}
+                    />
+                    <Button
+                        variant="contained"
+                        component="label"
+                        sx={{ mb: 3 }}
+                    >
+                        Upload Image
+                        <input
+                            type="file"
+                            accept="image/*"
+                            hidden
+                            onChange={(e) => setImage(e.target.files[0])} // Store selected file
+                        />
+                    </Button>
+                    {image && (
+                        <Typography variant="body1" sx={{ mb: 2 }}>
+                            Selected Image: {image.name}
+                        </Typography>
+                    )}
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        type="submit"
+                        disabled={loading}
+                        sx={{ mb: 2 }}
+                    >
+                        {loading ? <CircularProgress size={24} color="inherit" /> : 'Upload Post'}
+                    </Button>
+                    <Button
+                        variant="outlined"
+                        color="secondary"
+                        onClick={handleBackToHomeFeed}
+                    >
+                        Back to Home
+                    </Button>
 
-            {/* Error Snackbar */}
-            {errorMessage && (
-                <Snackbar
-                    open={!!errorMessage}
-                    autoHideDuration={3000}
-                    onClose={() => setErrorMessage('')}
-                >
-                    <Alert onClose={() => setErrorMessage('')} severity="error">
-                        {errorMessage}
-                    </Alert>
-                </Snackbar>
-            )}
+                    {/* Success Snackbar */}
+                    {successMessage && (
+                        <Snackbar
+                            open={!!successMessage}
+                            autoHideDuration={3000}
+                            onClose={() => setSuccessMessage('')}
+                        >
+                            <Alert onClose={() => setSuccessMessage('')} severity="success">
+                                {successMessage}
+                            </Alert>
+                        </Snackbar>
+                    )}
+
+                    {/* Error Snackbar */}
+                    {errorMessage && (
+                        <Snackbar
+                            open={!!errorMessage}
+                            autoHideDuration={3000}
+                            onClose={() => setErrorMessage('')}
+                        >
+                            <Alert onClose={() => setErrorMessage('')} severity="error">
+                                {errorMessage}
+                            </Alert>
+                        </Snackbar>
+                    )}
+                </Box>
+            </Container>
+            <Footer sx={{ marginTop: 'auto' }} />
         </Box>
     );
 };
