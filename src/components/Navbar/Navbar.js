@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, List, ListItemText, ListItemButton } from '@mui/material';
+import { Box, List, ListItemText, ListItemButton, Typography } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 // ICONS
 import HomeIcon from '@mui/icons-material/Home';
@@ -43,6 +43,15 @@ const Navbar = () => {
             }}
         >
             <List>
+                <ListItemButton
+                    onClick={() => handleNavigation('/homeFeed')}
+                    sx={{
+                        marginTop: 3  
+                    }}>
+                    <Typography variant='h4'>
+                        PicHaven
+                    </Typography>
+                </ListItemButton>
                 <ListItemButton
                     onClick={() => handleNavigation('/homeFeed')}
                     sx={{
